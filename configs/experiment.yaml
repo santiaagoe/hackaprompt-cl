@@ -18,9 +18,12 @@ translation:
   # api_model: completar si se usa la opción A
 
 victim:
-  backend: ollama
-  model: llama3.1:8b-instruct-q4_K_M   # anotar el tag exacto usado
-  temperature: 0
-  max_tokens: 64
+  # transformers: Colab/Kaggle con GPU (Llama en 4 bits). ollama: local (Mac con chip M o GPU).
+  backend: transformers
+  model: meta-llama/Llama-3.1-8B-Instruct   # modelo con acceso restringido: pedirlo en Hugging Face
+  ollama_model: llama3.1:8b-instruct-q4_K_M
+  temperature: 0          # decodificación greedy, determinista
+  max_tokens: 64          # largo máximo de la respuesta
+  batch_size: 8
 
 conditions: [en, es_neutro, es_cl]

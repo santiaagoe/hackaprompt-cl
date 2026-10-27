@@ -19,7 +19,13 @@ dependencies = [
 [project.optional-dependencies]
 translate = ["transformers>=4.44", "sentencepiece", "torch", "peft>=0.12"]
 quality = ["sacrebleu>=2.4", "unbabel-comet>=2.2", "langdetect>=1.0.9"]
-evaluate = ["requests>=2.31", "statsmodels>=0.14"]
+evaluate = [
+    "requests>=2.31",
+    "statsmodels>=0.14",
+    "transformers>=4.44",
+    "accelerate>=0.33",
+    "bitsandbytes>=0.43",
+]
 dev = ["pytest>=8.0", "ruff>=0.6", "pre-commit>=3.7", "nbstripout>=0.7"]
 
 [tool.setuptools.packages.find]

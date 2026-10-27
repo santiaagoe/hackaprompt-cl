@@ -7,8 +7,9 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 
-# En Colab se apunta a Drive con HACKAPROMPT_DATA_DIR; en local queda en <repo>/data.
+# En Colab se apuntan a Drive con estas variables; en local quedan dentro del repo.
 DATA_DIR = Path(os.environ.get("HACKAPROMPT_DATA_DIR", ROOT / "data"))
+RESULTS_DIR = Path(os.environ.get("HACKAPROMPT_RESULTS_DIR", ROOT / "results"))
 
 
 def load_config(path: str | Path = ROOT / "configs" / "experiment.yaml") -> dict:
