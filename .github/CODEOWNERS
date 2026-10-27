@@ -1,0 +1,5 @@
+# Asigna revisores automáticamente. Reemplazar por los usuarios de GitHub.
+# src/hackaprompt_cl/data/       @usuario1
+# src/hackaprompt_cl/translate/  @usuario2 @usuario3
+# src/hackaprompt_cl/quality/    @usuario4
+# src/hackaprompt_cl/evaluate/   @usuario5

@@ -1,0 +1,35 @@
+# Datos y resultados: van a Drive / Hugging Face, no a git
+data/raw/*
+data/interim/*
+data/processed/*
+results/*
+!data/**/.gitkeep
+!results/.gitkeep
+!data/README.md
+
+# Modelos y checkpoints
+models/
+checkpoints/
+*.safetensors
+*.bin
+*.gguf
+
+# Secretos
+.env
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Sistema
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hackaprompt-cl"
+version = "0.1.0"
+description = "Ataques de HackAPrompt traducidos a español chileno"
+requires-python = ">=3.10"
+dependencies = [
+    "datasets>=2.19",
+    "pandas>=2.0",
+    "pyyaml>=6.0",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+translate = ["transformers>=4.44", "sentencepiece", "torch", "peft>=0.12"]
+quality = ["sacrebleu>=2.4", "unbabel-comet>=2.2", "langdetect>=1.0.9"]
+evaluate = ["requests>=2.31", "statsmodels>=0.14"]
+dev = ["pytest>=8.0", "ruff>=0.6", "pre-commit>=3.7", "nbstripout>=0.7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
