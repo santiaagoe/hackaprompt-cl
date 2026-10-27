@@ -24,8 +24,9 @@ def _load_dotenv() -> None:
         line = line.strip()
         if line and not line.startswith("#") and "=" in line:
             key, value = line.split("=", 1)
-            if value.strip():
-                os.environ.setdefault(key.strip(), value.strip())
+            value = value.strip().strip("'\"")
+            if value:
+                os.environ.setdefault(key.strip(), value)
 
 
 def download(hf_name: str, out_path: Path = RAW_PATH, force: bool = False) -> Path:
@@ -40,7 +41,9 @@ def download(hf_name: str, out_path: Path = RAW_PATH, force: bool = False) -> Pa
     from datasets import load_dataset  # import local: solo se necesita al descargar
 
     _load_dotenv()
-    token = os.environ.get("HF_TOKEN")
+    # strip(): un token copiado con un espacio o salto de línea al final hace fallar
+    # la conexión con "Illegal header value"
+    token = os.environ.get("HF_TOKEN", "").strip()
     if not token:
         raise RuntimeError(
             "Falta HF_TOKEN. Créalo en https://huggingface.co/settings/tokens, acepta las "
