@@ -8,7 +8,7 @@ Convención de nombres: `NN_tema_autor.ipynb` (ej. `02_piloto_traduccion_santiag
 from google.colab import drive, userdata
 drive.mount("/content/drive")
 
-!git clone https://github.com/<organizacion>/hackaprompt-cl.git
+!git clone https://github.com/santiaagoe/hackaprompt-cl.git
 %cd hackaprompt-cl
 !pip install -q -e ".[translate,quality,evaluate]"
 
