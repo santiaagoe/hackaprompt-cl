@@ -30,7 +30,7 @@ hackaprompt-cl/
 ## Cómo empezar
 
 ```bash
-git clone https://github.com/<organizacion>/hackaprompt-cl.git
+git clone https://github.com/santiaagoe/hackaprompt-cl.git
 cd hackaprompt-cl
 python -m venv .venv && source .venv/bin/activate   # en Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
@@ -39,6 +39,41 @@ pytest                      # debería pasar todo
 ```
 
 En Google Colab, ver [notebooks/README.md](notebooks/README.md).
+
+## Dónde trabajar
+
+El código se escribe en el computador y solo lo que necesita GPU se ejecuta en
+Colab o Kaggle. Los notebooks no tienen lógica propia: clonan el repo y llaman
+funciones de `src/`.
+
+| Dónde | Para qué |
+| --- | --- |
+| **Computador** (VS Code + Git) | Escribir `src/`, pruebas y configs; ramas, commits y PRs. Todo lo que no necesita GPU: descarga y muestreo, chequeos de calidad, criterio de éxito, análisis estadístico |
+| **Google Colab** | Lo que necesita GPU: traducción (MarianMT/NLLB), Llama, COMET, Tulio, pruebas del LoRA |
+| **Kaggle Notebooks** | Corridas largas: experimento completo y entrenamiento del traductor propio (C) |
+| **Drive compartido** (`hackaprompt-cl/`) | Datos (`data/`) y resultados (`results/`). Nunca en Git |
+
+### Ciclo de trabajo
+
+1. **Computador:** crear la rama, escribir la función en `src/` con su prueba,
+   correr `pytest` y subir la rama (`git push`).
+2. **Colab / Kaggle:** clonar esa rama (`git clone -b <rama> ...`), ejecutar con
+   GPU y guardar los resultados en Drive.
+3. **Si hay que corregir algo:** se corrige en el computador, se sube, y en el
+   notebook basta con `!git pull` y volver a ejecutar.
+4. **Cuando funciona:** abrir el Pull Request.
+
+Si Colab corta la sesión no se pierde código, porque vive en GitHub; los
+scripts largos guardan resultados parciales en Drive para poder retomar.
+
+### A tener en cuenta
+
+- **Llama necesita acceso:** cada integrante que lo ejecute debe aceptar la
+  licencia del modelo en Hugging Face y guardar su `HF_TOKEN` en los *Secrets*
+  de Colab (o en `.env` en local).
+- **Backend del modelo víctima:** en local se puede usar Ollama (Mac con chip M
+  o PC con GPU de 8 GB o más). En Colab y Kaggle se usa `transformers` en 4 bits
+  o `vLLM`. Se elige con `victim.backend` en `configs/experiment.yaml`.
 
 ## Flujo de trabajo
 
