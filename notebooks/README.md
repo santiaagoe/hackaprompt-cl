@@ -15,9 +15,11 @@ drive.mount("/content/drive")
 import os
 os.environ["HF_TOKEN"] = userdata.get("HF_TOKEN")   # Secrets de Colab, nunca en el código
 
-# Datos compartidos en Drive, enlazados donde el código los espera
-!rm -rf data && ln -s /content/drive/MyDrive/hackaprompt-cl/data data
-!rm -rf results && ln -s /content/drive/MyDrive/hackaprompt-cl/results results
+import sys
+sys.path.insert(0, "/content/hackaprompt-cl/src")   # pip install -e no se ve hasta reiniciar
+
+# Datos compartidos en Drive: el código los lee y escribe ahí
+os.environ["HACKAPROMPT_DATA_DIR"] = "/content/drive/MyDrive/hackaprompt-cl/data"
 ```
 
 Para trabajar en una rama: `!git switch feat/12-mi-rama` después del clone.

@@ -18,11 +18,11 @@ import subprocess
 
 import pandas as pd
 
-from hackaprompt_cl.config import ROOT, load_config
+from hackaprompt_cl.config import DATA_DIR, ROOT, load_config
 from hackaprompt_cl.data.download import RAW_PATH, download
 from hackaprompt_cl.data.sample import SPLITS, clean_pool, split_by_level, summary
 
-INTERIM = ROOT / "data" / "interim"
+INTERIM = DATA_DIR / "interim"
 
 
 def _git_commit() -> str:

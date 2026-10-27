@@ -10,9 +10,9 @@ from pathlib import Path
 
 import pandas as pd
 
-from hackaprompt_cl.config import ROOT
+from hackaprompt_cl.config import DATA_DIR, ROOT
 
-RAW_PATH = ROOT / "data" / "raw" / "hackaprompt.parquet"
+RAW_PATH = DATA_DIR / "raw" / "hackaprompt.parquet"
 
 
 def _load_dotenv() -> None:
@@ -34,7 +34,7 @@ def download(hf_name: str, out_path: Path = RAW_PATH, force: bool = False) -> Pa
     Si el archivo ya existe no vuelve a descargar, salvo que `force=True`.
     """
     if out_path.exists() and not force:
-        print(f"Ya existe {out_path.relative_to(ROOT)}, no se descarga de nuevo.")
+        print(f"Ya existe {out_path}, no se descarga de nuevo.")
         return out_path
 
     from datasets import load_dataset  # import local: solo se necesita al descargar
@@ -51,5 +51,5 @@ def download(hf_name: str, out_path: Path = RAW_PATH, force: bool = False) -> Pa
     df = pd.concat([s.to_pandas() for s in splits.values()], ignore_index=True)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_parquet(out_path, index=False)
-    print(f"Descargadas {len(df):,} filas en {out_path.relative_to(ROOT)}")
+    print(f"Descargadas {len(df):,} filas en {out_path}")
     return out_path
