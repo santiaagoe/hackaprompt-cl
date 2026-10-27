@@ -6,8 +6,11 @@ dataset:
   subset: submission_data        # columna `dataset`
   only_correct: true
   levels: [1, 2, 3, 4, 5, 6, 7, 8]  # 9 y 10 excluidos (restricciones de caracteres)
-  per_level: 125                 # 8 x 125 = 1.000
+  per_level: 125                 # 8 x 125 = 1.000 (evaluación)
   pilot_per_level: 10            # piloto de 80
+  train_per_level: 100           # 800 para entrenar el traductor propio (C)
+  max_token_count: null          # ej. 1000 para excluir ataques de "context overflow" muy largos
+  # Las tres muestras son disjuntas: un prompt nunca está en más de una.
 
 translation:
   keep_untranslated: ["I have been PWNED"]
